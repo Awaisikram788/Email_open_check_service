@@ -28,9 +28,7 @@ def track_email_open(request):
     return response
 
 def get_tracking_data(request):
-    email = request.GET.get('email')
-
     # Query email tracking information
-    tracking_records = EmailTracking.objects.filter(email=email).values('email', 'opened', 'timestamp')
+    tracking_records = EmailTracking.objects.all().values('email', 'opened', 'token','timestamp')
 
     return JsonResponse(list(tracking_records), safe=False)
